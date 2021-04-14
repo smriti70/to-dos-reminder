@@ -1,0 +1,75 @@
+body{
+    text-align:center;
+    background-color: #f5f5f5;
+    margin:0px;
+    box-sizing: border-box;
+}
+
+.heading {
+    /* color:#364f6b; */
+    color:white;
+    font-size: 5rem;
+    font-weight: normal;
+    font-family: 'Montserrat', sans-serif;
+    margin:0px;
+}
+
+.fas {
+    color:#364f6b;;
+}
+
+.header {
+    padding:1rem;
+    background-color:#3fc1c9;
+    border-bottom:5px solid #fc5185;
+}
+
+.form{
+    width:30%;
+    height:70%;
+    background-color: #3fc1c9;
+    margin: 5rem auto;
+    padding:1rem 1rem;
+    border-radius: 25px;
+    transition: 0.5s;
+    box-shadow: 5px 8px 41px 26px rgba(0,0,0,0.24);
+    -webkit-box-shadow: 5px 8px 41px 26px rgba(0,0,0,0.24);
+    -moz-box-shadow: 5px 8px 41px 26px rgba(0,0,0,0.24);
+}
+
+.form:hover{
+    transform: scale(1.1);
+}
+
+.login-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+}
+
+
+.form input{
+    width:66%;
+    padding: 0.75rem;
+}
+
+.form button{
+    padding: 0.5rem 2rem;
+    font-size:1rem;
+    background-color: #364f6b;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    border: none;
+    transition: 0.5s;
+    outline:none;
+}
+
+.form button:hover{
+    transform: scale(1.1);
+}
+
+.form span{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight:bold;
+}
