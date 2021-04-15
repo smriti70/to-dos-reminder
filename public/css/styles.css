@@ -73,3 +73,53 @@ body{
     font-size: 1rem;
     font-weight:bold;
 }
+
+.list{
+    width:30%;
+    height:70%;
+    background-color: white;
+    margin:0 auto;    
+    margin-bottom: 5rem;
+}
+
+.list input{
+    padding:20px 50px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    width: 60%;
+}
+
+.list input:focus{
+    border-bottom: 3px solid #3fc1c9;
+}
+
+.list button {
+    background-color: #3fc1c9;
+    border:none;   
+    padding: 8px 15px;
+    font-size: 25px;
+    border-radius: 100px;
+    color:white;
+    cursor: pointer;
+    outline: none;
+}
+
+.listContainer {
+    margin-top: 3rem;   
+}
+
+.listItem {
+    margin: auto;
+    width: 30%;
+    height: 70%;
+}
+
+.listItem p {
+    background-color:white;
+    padding:20px 50px;
+    color: #3fc1c9;
+    border-bottom: 1px solid #A9A9A9;
+    margin:0;
+    font-size: 20px;
+}

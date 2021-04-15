@@ -1,0 +1,15 @@
+<%- include("partials/header") -%>
+
+<div class="listContainer">
+<% initialList.forEach(function(ListItem){ %>
+    <div class="listItem"><p><%= ListItem.item %></p></div>
+<% });%>
+</div>
+    
+
+<form class="list" action="/list" method="post">
+    <input type="text" placeholder="New Item" name="item">
+    <button type="submit" >+</button>
+</form>
+
+<%- include("partials/footer") -%>
