@@ -113,13 +113,18 @@ body{
     margin: auto;
     width: 30%;
     height: 70%;
+    background-color:white;
+    border-bottom: 1px solid #A9A9A9;
+    display:flex;
+}
+
+.listItem input[type="checkbox"]{
+    margin:20px;
 }
 
 .listItem p {
-    background-color:white;
     padding:20px 50px;
     color: #3fc1c9;
-    border-bottom: 1px solid #A9A9A9;
     margin:0;
     font-size: 20px;
 }

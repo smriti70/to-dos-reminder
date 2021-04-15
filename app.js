@@ -64,6 +64,18 @@ app.post("/list",function(req,res){
     res.redirect("/list");
 });
 
+app.post("/delete",function(req,res){
+    const id = req.body.checkbox;
+    Test.findOneAndDelete({_id:id},function(err,foundItem){
+        if(err){
+            res.send(err);
+        }
+        else{
+            res.redirect("/list");
+        }
+    });
+});
+
 app.listen(3000,function(){
     console.log("Server is up and running on port 3000.");
 });
