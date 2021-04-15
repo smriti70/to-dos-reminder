@@ -74,15 +74,19 @@ body{
     font-weight:bold;
 }
 
-.list{
-    width:30%;
-    height:70%;
-    background-color: white;
-    margin:0 auto;    
-    margin-bottom: 5rem;
+.listContainer {
+    border-radius: 10px;
+    margin: 3rem auto;
+    width: 30%;
+    height: 70%;
+    background-color:white;   
+    box-shadow: -1px 2px 27px 13px rgba(0,0,0,0.32);
+    -webkit-box-shadow: -1px 2px 27px 13px rgba(0,0,0,0.32);
+    -moz-box-shadow: -1px 2px 27px 13px rgba(0,0,0,0.32);
+
 }
 
-.list input{
+.listContainer input[type="text"]{
     padding:20px 50px;
     border: none;
     outline: none;
@@ -90,11 +94,11 @@ body{
     width: 60%;
 }
 
-.list input:focus{
+.listContainer input[type="text"]:focus{
     border-bottom: 3px solid #3fc1c9;
 }
 
-.list button {
+.listContainer button {
     background-color: #3fc1c9;
     border:none;   
     padding: 8px 15px;
@@ -105,15 +109,7 @@ body{
     outline: none;
 }
 
-.listContainer {
-    margin-top: 3rem;   
-}
-
 .listItem {
-    margin: auto;
-    width: 30%;
-    height: 70%;
-    background-color:white;
     border-bottom: 1px solid #A9A9A9;
     display:flex;
 }
@@ -123,8 +119,8 @@ body{
 }
 
 .listItem p {
-    padding:20px 50px;
+    padding:20px 30px;
     color: #3fc1c9;
-    margin:0;
+    margin: 0;
     font-size: 20px;
 }

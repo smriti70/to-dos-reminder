@@ -1,21 +1,19 @@
 <%- include("partials/header") -%>
 
 <div class="listContainer">
-<% initialList.forEach(function(ListItem){ %>
-    <form action="/delete" method="post">
-        <div class="listItem">
-            <input type="checkbox" name="checkbox" value="<%= ListItem._id %>" onchange="this.form.submit()">
-            <p><%= ListItem.item %></p>
-        </div>
-        <input type="hidden">
-    </form>
-<% });%>
-</div>
-    
+    <% initialList.forEach(function(ListItem){ %>
+        <form action="/delete" method="post">
+            <div class="listItem">
+                <input type="checkbox" name="checkbox" value="<%= ListItem._id %>" onchange="this.form.submit()">
+                <p><%= ListItem.item %></p>
+            </div>
+        </form>
+    <% });%>
 
-<form class="list" action="/list" method="post">
-    <input type="text" placeholder="New Item" name="item">
-    <button type="submit" >+</button>
-</form>
+    <form action="/list" method="post">
+        <input type="text" placeholder="New Item" name="item">
+        <button type="submit" >+</button>
+    </form>
+</div>
 
 <%- include("partials/footer") -%>
