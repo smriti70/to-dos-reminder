@@ -15,19 +15,24 @@ app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost:27017/testingDB",{useNewUrlParser:true,useUnifiedTopology:true});
 
-const testSchema = new mongoose.Schema({
+const listSchema = new mongoose.Schema({
     item: String
 });
+const userSchema = new mongoose.Schema({
+    email: String,
+    listItems: [listSchema]
+});
 
-const Test = mongoose.model("Test",testSchema);
+const List = mongoose.model("List",listSchema);
+const User = mongoose.model("User",userSchema);
 
-const item1 = new Test({
+const item1 = new List({
     item: "Welcome to your Todo list!"
 });
-const item2 = new Test({
+const item2 = new List({
     item: "Hit the + button to add the new item."
 });
-const item3 = new Test({
+const item3 = new List({
     item: "<-- Hit this to delete an item."
 });
 
@@ -42,22 +47,35 @@ app.get("/register",function(req,res){
 });
 
 app.get("/list",function(req,res){
-    Test.find({},function(err,foundItems){
+    List.find({},function(err,foundItems){
         if(foundItems.length===0){
-            initials.forEach(function(item){
-                item.save();
+            initials.forEach(function(todo){
+                todo.save();
             });
+        } else {
+            res.render("list",{initialList:foundItems});
         }
     });
-    Test.find({},function(err,foundItems){
-        res.render("list",{initialList:foundItems});    
+});
+
+app.post("/",function(req,res){
+    res.redirect("/list");
+});
+
+app.post("/register",function(req,res){
+    const userEmail = req.body.email;
+    const newUser = new User({
+        email: userEmail
     });
-    
+
+    newUser.listItems.push(item1,item2,item3);
+    newUser.save();
+    res.redirect("/list");
 });
 
 app.post("/list",function(req,res){
     const text = req.body.item;
-    const testElement = new Test({
+    const testElement = new List({
         item: text
     });
     testElement.save();
@@ -66,7 +84,7 @@ app.post("/list",function(req,res){
 
 app.post("/delete",function(req,res){
     const id = req.body.checkbox;
-    Test.findOneAndDelete({_id:id},function(err,foundItem){
+    List.findOneAndDelete({_id:id},function(err,foundItem){
         if(err){
             res.send(err);
         }
