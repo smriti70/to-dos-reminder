@@ -70,14 +70,8 @@ app.get("/register",function(req,res){
 
 app.get("/list",function(req,res){
     if(req.isAuthenticated()){
-        List.find({},function(err,foundItems){
-            if(foundItems.length===0){
-                initials.forEach(function(todo){
-                    todo.save();
-                });
-            } else {
-                res.render("list",{initialList:foundItems});
-            }
+        User.findById(req.user._id,function(err,foundUser){
+            res.render("list",{initialList:foundUser.listItems});
         });
     } else {
         res.redirect("/");
@@ -110,6 +104,12 @@ app.post("/register",function(req,res){
             res.redirect("/register");
         } else {
                 passport.authenticate("local")(req,res,function(){
+                User.findById(req.user._id,function(err,foundUser){
+                    if(!err){
+                        foundUser.listItems.push(item1,item2,item3);
+                        foundUser.save();
+                    }
+                });
                 res.redirect("/list");
             });
         }
@@ -123,23 +123,26 @@ app.post("/logout",function(req,res){
 
 app.post("/list",function(req,res){
     const text = req.body.item;
-    const testElement = new List({
-        item: text
+    User.findOne({_id:req.user._id},function(err,foundUser){
+        if(!err){
+            const listItem = new List({
+                item:text
+            });
+            foundUser.listItems.push(listItem);
+            foundUser.save();
+        }
     });
-    testElement.save();
+        
     res.redirect("/list");
 });
 
 app.post("/delete",function(req,res){
     const id = req.body.checkbox;
-    List.findOneAndDelete({_id:id},function(err,foundItem){
-        if(err){
-            res.send(err);
-        }
-        else{
-            res.redirect("/list");
-        }
+    User.updateOne({_id:req.user._id},{$pull: {listItems:{_id:id}}},function(err,results){
+        res.redirect("/list");
     });
+
+    console.log(req);
 });
 
 app.listen(3000,function(){
