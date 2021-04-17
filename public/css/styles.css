@@ -6,7 +6,6 @@ body{
 }
 
 .heading {
-    /* color:#364f6b; */
     color:white;
     font-size: 5rem;
     font-weight: normal;
@@ -72,6 +71,26 @@ body{
     font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
     font-weight:bold;
+}
+
+.logout {
+    padding: 8px 36px;
+    /* background-color:#3fc1c9; */
+    text-align: right;
+}
+
+.logout button {
+    background-color: #364f6b;
+    border: none;
+    padding: 10px;
+    color: white;
+    width: 15%;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.logout button:hover {
+    transform: scale(1.1);
 }
 
 .listContainer {

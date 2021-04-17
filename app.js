@@ -116,6 +116,11 @@ app.post("/register",function(req,res){
     });
 });
 
+app.post("/logout",function(req,res){
+    req.logout();
+    res.redirect("/");
+});
+
 app.post("/list",function(req,res){
     const text = req.body.item;
     const testElement = new List({

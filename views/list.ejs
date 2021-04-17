@@ -1,5 +1,11 @@
 <%- include("partials/header") -%>
 
+<div class="logout">
+    <form action="/logout" method="post">
+        <button type="submit">Log out</button>
+    </form>    
+</div>
+
 <div class="listContainer">
     <% initialList.forEach(function(ListItem){ %>
         <form action="/delete" method="post">
