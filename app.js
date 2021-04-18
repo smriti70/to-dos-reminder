@@ -142,7 +142,6 @@ app.post("/delete",function(req,res){
         res.redirect("/list");
     });
 
-    console.log(req);
 });
 
 app.listen(3000,function(){
