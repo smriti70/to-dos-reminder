@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 app.use(session({
-    secret: process.env.SECRET,
+    secret: "thisIsSecretDontTellAnybody.",
     resave: false,
     saveUninitialized: false
 }));
@@ -26,7 +26,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb+srv://admin-smriti:"+process.env.USERPASSWORD+"@cluster0.zlmhc.mongodb.net/testingDB",{useNewUrlParser:true,useUnifiedTopology:true});
+mongoose.connect("mongodb+srv://admin-smriti:"+"testsmriti123"+"@cluster0.zlmhc.mongodb.net/testingDB",{useNewUrlParser:true,useUnifiedTopology:true});
 
 mongoose.set("useCreateIndex",true);
 
