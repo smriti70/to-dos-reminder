@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+require('./db/mongoose');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -26,7 +27,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb+srv://admin-smriti:"+"testsmriti123"+"@cluster0.zlmhc.mongodb.net/testingDB",{useNewUrlParser:true,useUnifiedTopology:true});
 
 mongoose.set("useCreateIndex",true);
 
