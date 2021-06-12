@@ -1,12 +1,15 @@
 require('dotenv').config();
 const express = require('express');
 require('./db/mongoose');
+const User = require('./models/user');
+const List = require('./models/list');
+
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
-const passportLocalMongoose = require('passport-local-mongoose');
+
 
 const app = express();
 
@@ -30,19 +33,9 @@ app.use(passport.session());
 
 mongoose.set("useCreateIndex",true);
 
-const listSchema = new mongoose.Schema({
-    item: String
-});
-const userSchema = new mongoose.Schema({
-    email: String,
-    password: String,
-    listItems: [listSchema]
-});
 
-userSchema.plugin(passportLocalMongoose);
 
-const List = mongoose.model("List",listSchema);
-const User = mongoose.model("User",userSchema);
+
 
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
