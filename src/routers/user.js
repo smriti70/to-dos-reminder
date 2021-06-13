@@ -1,63 +1,66 @@
 const express = require('express');
-const passport = require('passport');
 const router = new express.Router();
 const List = require('../models/list');
 const User = require('../models/user');
+const auth = require('../middleware/auth');
 
-const item1 = new List({
-    item: "Welcome to your Todo list!"
+
+router.post("/",async (req,res) => {
+    try {
+        const user = await User.findByCredentials(req.body.email,req.body.password);
+        const token = await user.generateAuthToken();
+        // res.setHeader("auth-token",token);
+        window.localStorage.setItem("Authorization", "Bearer " + token);
+        res.redirect("/list");
+    } catch(e) {
+        res.status(400).send(e);
+    }
 });
-const item2 = new List({
-    item: "Hit the + button to add the new item."
-});
-const item3 = new List({
-    item: "<-- Hit this to delete an item."
-});
 
-// const initials = [item1,item2,item3];
-
-
-router.post("/",function(req,res){
+router.post("/register",async function(req,res){
+    const user = new User({email: req.body.email, password: req.body.password});
+    const token = await user.generateAuthToken();
     
-    const user = new User({
-        username: req.body.username,
-        password: req.body.password
-    });
+    try {
+        const item1 = new List({
+            item: "Welcome to your Todo list!",
+            owner: user._id
+        });
+        const item2 = new List({
+            item: "Hit the + button to add the new item.",
+            owner: user._id
+        });
+        const item3 = new List({
+            item: "<-- Hit this to delete an item.",
+            owner: user._id
+        });
+        await item1.save();
+        await item2.save();
+        await item3.save();
 
-    req.login(user, function(err){
-        if(err) {
-            console.log(err);
-        } else {
-            passport.authenticate('local')(req,res,function(){
-                res.redirect("/list");
-            });
-        }
-    });
+        res.cookie("jwt",token, {
+            expires: new Date(Date.now() + 6000000),
+            httpOnly: true
+        });
+        
+        res.redirect("/list");
+    } catch(e) {
+        res.redirect("/register");
+    }
 });
 
-router.post("/register",function(req,res){
-
-    User.register({username:req.body.username}, req.body.password, function(err,user){
-        if(err){
-            console.log(err);
-            res.redirect("/register");
-        } else {
-                passport.authenticate("local")(req,res,function(){
-                User.findById(req.user._id,function(err,foundUser){
-                    if(!err){
-                        foundUser.listItems.push(item1,item2,item3);
-                        foundUser.save();
-                    }
-                });
-                res.redirect("/list");
-            });
-        }
-    });
-});
-
-router.post("/logout",function(req,res){
-    req.logout();
-    res.redirect("/");
+router.post("/logout", auth, async function(req,res){
+    // req.logout();
+    try {
+        req.user.tokens = req.user.tokens.filter((token)=>{
+            return token.token !== req.token;
+        });
+        await req.user.save();
+        res.clearCookie("jwt");
+        res.redirect("/");
+    } catch(e) {
+        res.status(500).send(e);
+    }
 });
 
 
