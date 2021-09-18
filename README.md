@@ -13,7 +13,7 @@
 * CSS
 * JavaScript
 * Node.js
-* Passport.js
+* JWT
 * mongoDB
 * Heroku
 
