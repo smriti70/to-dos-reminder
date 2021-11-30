@@ -3,7 +3,6 @@
 ### To dos reminder is an app which help users to keep a track of all their to-dos.
 
 
-![Alt text](images/sample.png?raw=true "Optional Title")
 
 <hr>
 
